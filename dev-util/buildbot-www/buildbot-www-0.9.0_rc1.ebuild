@@ -37,7 +37,7 @@ DEPEND="${RDEPEND}
 	>=dev-python/setuptools-21.2.1[${PYTHON_USEDEP}]
 "
 
-S="${WORKDIR}/${PN}-${PV}/www/base"
+S="${WORKDIR}/${MY_P}"
 #[[ ${PV} == *9999 ]] && S=${S}/www/base
 
 python_install_all() {
