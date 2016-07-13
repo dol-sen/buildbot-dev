@@ -28,13 +28,13 @@ else
 	KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~x86-interix ~amd64-linux ~x86-linux ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris"
 fi
 
-RDEPEND="
-	=dev-util/buildbot-${PV}[${PYTHON_USEDEP}]
-	dev-python/mock[${PYTHON_USEDEP}]
-"
+RDEPEND=""
 
 DEPEND="${RDEPEND}
 	>=dev-python/setuptools-21.2.1[${PYTHON_USEDEP}]
+	=dev-util/buildbot-${PV}[${PYTHON_USEDEP}]
+	=dev-util/buildbot-pkg-${PV}[${PYTHON_USEDEP}]
+	dev-python/mock[${PYTHON_USEDEP}]
 "
 
 S="${WORKDIR}/${MY_P}"
