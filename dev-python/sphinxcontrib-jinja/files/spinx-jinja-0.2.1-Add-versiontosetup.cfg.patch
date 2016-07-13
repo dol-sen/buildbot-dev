@@ -1,0 +1,23 @@
+From 273e0bd637780b52d40d7bc0950f036b0ef2f5f6 Mon Sep 17 00:00:00 2001
+From: Brian Dolbec <bdolbec@gaikai.com>
+Date: Mon, 4 Jul 2016 12:48:06 -0700
+Subject: [PATCH] Add version to setup.cfg
+
+---
+ setup.cfg | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/setup.cfg b/setup.cfg
+index 1fd84a4..59412fe 100644
+--- a/setup.cfg
++++ b/setup.cfg
+@@ -1,5 +1,6 @@
+ [metadata]
+ name = sphinx-jinja
++version = 0.2.1
+ author = Pierre Tardy
+ author-email = tardyp@gmail.com
+ summary = includes jinja templates in a documentation
+-- 
+2.7.3
+
