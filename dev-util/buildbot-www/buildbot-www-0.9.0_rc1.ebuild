@@ -8,7 +8,8 @@ PYTHON_COMPAT=( python2_7 )
 
 EGIT_REPO_URI="git://github.com/buildbot/buildbot.git"
 
-inherit git-r3 distutils-r1
+[[ ${PV} == *9999 ]] && inherit git-r3
+inherit distutils-r1
 
 DESCRIPTION="BuildBot base web interface, use with buildbot-console-view or buildbot-waterfall-view, etc."
 HOMEPAGE="http://trac.buildbot.net/ https://github.com/buildbot/buildbot http://pypi.python.org/pypi/buildbot"

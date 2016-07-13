@@ -8,6 +8,7 @@ PYTHON_COMPAT=( python2_7 )
 
 EGIT_REPO_URI="git://github.com/buildbot/buildbot.git"
 
+[[ ${PV} == *9999 ]] && inherit git-r3
 inherit git-r3 distutils-r1
 
 MY_PV="${PV/_p/p}"
