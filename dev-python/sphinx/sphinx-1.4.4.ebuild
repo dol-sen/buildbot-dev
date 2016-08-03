@@ -4,7 +4,7 @@
 
 EAPI=5
 
-PYTHON_COMPAT=( python2_7 python3_{3,4,5} pypy)
+PYTHON_COMPAT=( python2_7 python3_{3,4,5})
 PYTHON_REQ_USE="threads(+)"
 
 inherit distutils-r1 eutils versionator
@@ -18,8 +18,8 @@ SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
-IUSE="doc latex test web"
+KEYWORDS="~amd64"
+IUSE="doc latex net test"
 
 RDEPEND="
 	=dev-python/alabaster-0.7*[${PYTHON_USEDEP}]
@@ -35,7 +35,7 @@ RDEPEND="
 	latex? (
 		dev-texlive/texlive-latexextra
 		app-text/dvipng
-	web? (
+	net? (
 		dev-python/requests[${PYTHON_USEDEP}]
 		>=dev-python/sqlalchemy-0.9[${PYTHON_USEDEP}]
 		>=dev-python/whoosh-2.0[${PYTHON_USEDEP}]
