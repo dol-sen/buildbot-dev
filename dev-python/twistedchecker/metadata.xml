@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>dol-sen@gentoo.org</email>
+		<description>Primary maintainer</description>
+	</maintainer>
+	<upstream>
+		<maintainer>
+			<email>twisted-python@twistedmatrix.com</email>
+			<name>Twisted Matrix Laboratories</name>
+		</maintainer>
+		<remote-id type="pypi">TwistedChecker</remote-id>
+	</upstream>
+	<longdescription>TwistedChecker checks Python code for compliance with the
+		Twisted coding standard
+		https://twistedmatrix.com/documents/current/core/development/policy/coding-standard.html
+	</longdescription>
+</pkgmetadata>
