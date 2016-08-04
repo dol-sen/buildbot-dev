@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>dol-sen@gentoo.org</email>
+		<description>Primary maintainer</description>
+	</maintainer>
+	<upstream>
+		<maintainer>
+			<email>tom.prince@twistedmatrix.com</email>
+			<name>Tom Prince</name>
+		</maintainer>
+		<remote-id type="pypi">twisted-dev-tools</remote-id>
+	</upstream>
+	<longdescription></longdescription>
+</pkgmetadata>
