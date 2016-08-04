@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>dol-sen@gentoo.org</email>
+		<description>Primary maintainer</description>
+	</maintainer>
+	<upstream>
+		<maintainer>
+			<email>micahel@gmail.com</email>
+			<name>Michael Hudson-Doyle</name>
+		</maintainer>
+		<remote-id type="pypi">h2</remote-id>
+	</upstream>
+	<longdescription>This is 'pydoctor', an API documentation generator that works by
+		static analysis.
+	</longdescription>
+</pkgmetadata>
