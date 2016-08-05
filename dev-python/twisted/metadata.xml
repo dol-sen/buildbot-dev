@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
+	<maintainer type="project">
+		<email>python@gentoo.org</email>
+		<name>Python</name>
+	</maintainer>
 	<maintainer type="person">
 		<email>dol-sen@gentoo.org</email>
-		<description>Primary maintainer</description>
+		<description>maintainer</description>
 	</maintainer>
 	<upstream>
 		<maintainer>
@@ -12,6 +16,12 @@
 		</maintainer>
 		<remote-id type="pypi">Twisted</remote-id>
 	</upstream>
+	<use>
+		<flag name="conch">include Twisted SSHv2 implementation</flag>
+		<flag name="dev">include development tools and packages</flag>
+		<flag name="http2">include http2 support</flag>
+		<flag name="serial">include serial port support</flag>
+	</use>
 	<longdescription>Twisted is an event-based framework for internet
 		applications, supporting Python 2.7 and Python 3.3+. It includes
 		modules for many different purposes, including the following:

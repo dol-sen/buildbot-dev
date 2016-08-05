@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -18,7 +18,8 @@ LICENSE="MIT"
 
 SLOT="0"
 
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~ppc ~ppc64 ~s390 ~sh ~x86 ~x86-fbsd ~ia64-hpux ~x86-interix ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+#KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~ppc ~ppc64 ~s390 ~sh ~x86 ~x86-fbsd ~ia64-hpux ~x86-interix ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="~amd64 ~x86"
 
 IUSE="conch crypt dev http2 serial +soap test"
 
@@ -37,7 +38,7 @@ RDEPEND=">=dev-python/zope-interface-3.6.0[${PYTHON_USEDEP}]
 	dev? (
 		>=dev-python/twistedchecker-0.4.0[${PYTHON_USEDEP}]
 		>=dev-python/pyflakes-1.0.0[${PYTHON_USEDEP}]
-		twisted-dev-tools >= 0.0.2[${PYTHON_USEDEP}]
+		>=dev-python/twisted-dev-tools-0.0.2[${PYTHON_USEDEP}]
 		dev-python/subunit[${PYTHON_USEDEP}]
 		>=dev-python/sphinx-1.3.1[${PYTHON_USEDEP}]
 		>=dev-python/pydoctor-15.0.0[${PYTHON_USEDEP}]
@@ -45,8 +46,8 @@ RDEPEND=">=dev-python/zope-interface-3.6.0[${PYTHON_USEDEP}]
 	serial? ( dev-python/pyserial[${PYTHON_USEDEP}] )
 	soap? ( dev-python/soappy[${PYTHON_USEDEP}] )
 	http2? (
-		>=dev-python/h2-2.3.0[${PYTHON_USEDEP}]
-		<dev-python/h2-3.0[${PYTHON_USEDEP}]
+		>=dev-python/hyper-h2-2.3.0[${PYTHON_USEDEP}]
+		<dev-python/hyper-h2-3.0[${PYTHON_USEDEP}]
 		>=dev-python/priority-1.1.0[${PYTHON_USEDEP}]
 		<dev-python/priority-2.0[${PYTHON_USEDEP}]
 	)
