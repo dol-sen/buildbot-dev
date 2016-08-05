@@ -52,7 +52,14 @@ RDEPEND=">=dev-python/zope-interface-3.6.0[${PYTHON_USEDEP}]
 		<dev-python/priority-2.0[${PYTHON_USEDEP}]
 	)
 "
-DEPEND="test? ( ${RDEPEND} )"
+DEPEND="
+	!dev-python-twisted-core
+	!dev-python/twisted-conch
+	!dev-python/twisted-names
+	!dev-python/twisted-words
+	!dev-python/twisted-web
+	test? ( ${RDEPEND} )
+"
 
 PATCHES=(
 	# Respect TWISTED_DISABLE_WRITING_OF_PLUGIN_CACHE variable.
