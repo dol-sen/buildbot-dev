@@ -12,7 +12,7 @@ DESCRIPTION="An asynchronous networking framework written in Python"
 
 HOMEPAGE="https://github.com/twisted/twistedchecker https://pypi.python.org/pypi/TwistedChecker"
 
-SRC_URI="https://github.com/twisted/${PN}/releases/tag/${P}"
+SRC_URI="https://github.com/twisted/${PN}/releases/tag/${P} -> ${P}.tar.gz"
 
 LICENSE="MIT"
 
