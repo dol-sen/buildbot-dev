@@ -21,7 +21,7 @@ SLOT="0"
 #KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~ppc ~ppc64 ~s390 ~sh ~x86 ~x86-fbsd ~ia64-hpux ~x86-interix ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 KEYWORDS="~amd64 ~x86"
 
-IUSE="conch crypt dev http2 serial +soap test"
+IUSE="conch crypt dev serial +soap test"
 
 RDEPEND=">=dev-python/zope-interface-3.6.0[${PYTHON_USEDEP}]
 	conch? (
@@ -45,12 +45,6 @@ RDEPEND=">=dev-python/zope-interface-3.6.0[${PYTHON_USEDEP}]
 	)
 	serial? ( dev-python/pyserial[${PYTHON_USEDEP}] )
 	soap? ( $(python_gen_cond_dep 'dev-python/soappy[${PYTHON_USEDEP}]' python2_7) )
-	http2? (
-		>=dev-python/hyper-h2-2.3.0[${PYTHON_USEDEP}]
-		<dev-python/hyper-h2-3.0[${PYTHON_USEDEP}]
-		>=dev-python/priority-1.1.0[${PYTHON_USEDEP}]
-		<dev-python/priority-2.0[${PYTHON_USEDEP}]
-	)
 "
 DEPEND="
 	!dev-python/twisted-core
