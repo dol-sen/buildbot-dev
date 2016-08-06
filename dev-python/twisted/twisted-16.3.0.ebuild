@@ -63,7 +63,7 @@ DEPEND="
 
 PATCHES=(
 	# Respect TWISTED_DISABLE_WRITING_OF_PLUGIN_CACHE variable.
-	"${FILESDIR}/${PN}-9.0.0-respect_TWISTED_DISABLE_WRITING_OF_PLUGIN_CACHE.patch"
+	"${FILESDIR}/${PN}-core-9.0.0-respect_TWISTED_DISABLE_WRITING_OF_PLUGIN_CACHE.patch"
 )
 
 python_prepare_all() {
