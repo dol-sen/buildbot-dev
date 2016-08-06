@@ -11,7 +11,7 @@ DESCRIPTION="API doc generator"
 
 HOMEPAGE="http://github.com/twisted/pydoctor"
 
-SRC_URI="https://github.com/twisted/${PN}/releases/tag/${PV}"
+SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="MIT X11"
 

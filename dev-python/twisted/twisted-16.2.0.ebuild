@@ -10,9 +10,9 @@ inherit eutils flag-o-matic twisted-r1
 
 DESCRIPTION="An asynchronous networking framework written in Python"
 
-HOMEPAGE="https://github.com/twisted/twistedchecker https://pypi.python.org/pypi/TwistedChecker"
+HOMEPAGE="https://github.com/twisted/twisted https://pypi.python.org/pypi/Twisted"
 
-SRC_URI="https://github.com/twisted/${PN}/releases/tag/${P} -> ${P}.tar.gz"
+SRC_URI="mirror://pypi/${P:0:1}/twisted/Twisted-${PV}.tar.bz2 -> ${P}.tar.bz2"
 
 LICENSE="MIT"
 
