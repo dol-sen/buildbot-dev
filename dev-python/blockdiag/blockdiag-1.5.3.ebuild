@@ -8,24 +8,18 @@ PYTHON_COMPAT=( python2_7 python3_{3,4} )
 inherit distutils-r1
 
 DESCRIPTION="blockdiag generates block-diagram image from text"
-
 HOMEPAGE="http://blockdiag.com/ https://pypi.python.org/pypi/blockdiag/ https://bitbucket.org/blockdiag/blockdiag/"
-
 SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="Apache-2.0"
-
 SLOT="0"
-
 KEYWORDS="~amd64 ~x86"
-
 IUSE="test"
 
 RDEPEND="
 	>=dev-python/funcparserlib-0.3.6[${PYTHON_USEDEP}]
 	>=dev-python/pillow-2.2.1[${PYTHON_USEDEP}]
 "
-
 DEPEND="
 	${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]

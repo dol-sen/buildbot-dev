@@ -8,17 +8,12 @@ PYTHON_COMPAT=( python2_7 )
 inherit eutils distutils-r1
 
 DESCRIPTION="GitHub API client implemented using Twisted"
-
 HOMEPAGE="https://github.com/tomprince/txgithub https://pypi.python.org/pypi/txgithub"
-
 SRC_URI="https://github.com/tomprince/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="MIT"
-
 SLOT="0"
-
 KEYWORDS="~amd64"
-
 IUSE="test"
 
 RDEPEND="
@@ -26,5 +21,4 @@ RDEPEND="
 	>=dev-python/twisted-web-12.3.0[${PYTHON_USEDEP}]
 	dev-python/pyopenssl[${PYTHON_USEDEP}]
 "
-
 DEPEND="${RDEPEND}"

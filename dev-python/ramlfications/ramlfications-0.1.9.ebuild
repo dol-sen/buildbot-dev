@@ -8,17 +8,12 @@ PYTHON_COMPAT=( python2_7 python3_4 pypy)
 inherit eutils distutils-r1
 
 DESCRIPTION="RAML reference implementation in Python"
-
 HOMEPAGE="https://ramlfications.readthedocs.org/ https://pypi.python.org/pypi/ramlfications/"
-
 SRC_URI="https://github.com/spotify/${PN}/releases/download/0.1.9/${P}.tar.gz"
 
 LICENSE="Apache-2.0"
-
 SLOT="0"
-
 KEYWORDS="~amd64"
-
 IUSE="test"
 
 RDEPEND="
@@ -31,7 +26,6 @@ RDEPEND="
 	dev-python/termcolor[${PYTHON_USEDEP}]
 	dev-python/xmltodict[${PYTHON_USEDEP}]
 "
-
 DEPEND="
 	${RDEPEND}
 	test? (

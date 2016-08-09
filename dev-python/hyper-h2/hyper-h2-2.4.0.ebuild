@@ -8,17 +8,12 @@ PYTHON_COMPAT=( python2_7 python3_{4,5} pypy)
 inherit distutils-r1
 
 DESCRIPTION="HTTP/2 State-Machine based protocol implementation"
-
 HOMEPAGE="http://python-hyper.org/${PN} https://pypi.python.org/pypi/{PN}"
-
 SRC_URI="mirror://pypi/${P:0:1}/h2/h2-${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="MIT"
-
 SLOT="0"
-
 KEYWORDS="~amd64 ~x86"
-
 IUSE=""
 
 DEPEND="
@@ -31,7 +26,3 @@ DEPEND="
 	$(python_gen_cond_dep '<dev-python/enum34-2.0.0[${PYTHON_USEDEP}]' python2_7)
 "
 RDEPEND="${DEPEND}"
-
-#S=${WORKDIR}/${P}
-
-
