@@ -55,6 +55,7 @@ RDEPEND=">=dev-python/zope-interface-3.6.0[${PYTHON_USEDEP}]
 DEPEND="
 	!dev-python/twisted-core
 	!dev-python/twisted-conch
+	!dev-python/twisted-mail
 	!dev-python/twisted-names
 	!dev-python/twisted-words
 	!dev-python/twisted-web
@@ -158,4 +159,8 @@ python_install_all() {
 
 	newconfd "${FILESDIR}/twistd.conf" twistd
 	newinitd "${FILESDIR}/twistd.init" twistd
+}
+
+pkg_postinst() {
+	einfo "Install complete"
 }
