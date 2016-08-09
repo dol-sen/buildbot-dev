@@ -127,9 +127,9 @@ python_install_all() {
 		doins -r contrib docs/examples
 	fi
 
-	newconfd "${FILESDIR}"/buildmaster.confd buildmaster
-	newinitd "${FILESDIR}"/buildmaster.initd buildmaster
-	systemd_dounit "${FILESDIR}"/${PN}.service
+	newconfd "${FILESDIR}"/buildmaster.confd.9 buildmaster
+	newinitd "${FILESDIR}"/buildmaster.initd.9 buildmaster
+	systemd_dounit "${FILESDIR}/${PN}9".service
 
 	# In case of multiple masters, it's possible to edit web files
 	# so all master can share the changes. So protect them!
