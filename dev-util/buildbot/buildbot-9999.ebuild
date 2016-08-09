@@ -74,12 +74,18 @@ DEPEND="${RDEPEND}
 		)
 		dev-python/moto[${PYTHON_USEDEP}]
 		dev-python/boto3[${PYTHON_USEDEP}]
+		dev-python/ramlfications[${PYTHON_USEDEP}]
+		dev-python/pyjade[${PYTHON_USEDEP}]
+		dev-python/txgithub[${PYTHON_USEDEP}]
+		dev-python/txrequests[${PYTHON_USEDEP}]
 	)"
 
-# pyjade --- no gentoo pkg
-# ramlfications --- no gentoo-pkg
-# txgithub --- no gentoo pkg
-# txrequests --- no gentoo pkg
+# still yet to be added deps
+# doc? (     'sphinxcontrib-blockdiag',
+#            'sphinxcontrib-spelling',
+#            'pyenchant',
+#            'docutils>=0.8',
+#            'sphinx-jinja',)
 
 S=${WORKDIR}/${MY_P}
 [[ ${PV} == *9999 ]] && S=${S}/master
