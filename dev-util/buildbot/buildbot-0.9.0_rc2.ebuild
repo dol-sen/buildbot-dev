@@ -59,8 +59,7 @@ RDEPEND=">=dev-python/jinja-2.1[${PYTHON_USEDEP}]
 	)
 	dev-python/future[${PYTHON_USEDEP}]
 	>=dev-python/python-dateutil-1.5[${PYTHON_USEDEP}]
-	>=dev-python/autobahn-0.10.2[${PYTHON_USEDEP}]
-	<dev-python/autobahn-0.13.0[${PYTHON_USEDEP}]
+	>=dev-python/autobahn-0.16.0[${PYTHON_USEDEP}]
 	>=dev-python/txaio-2.2.2[${PYTHON_USEDEP}]
 	"
 DEPEND="${RDEPEND}
