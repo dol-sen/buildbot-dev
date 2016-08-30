@@ -6,8 +6,6 @@ EAPI=5
 
 PYTHON_COMPAT=( python2_7 python3_4 )
 
-RESTRICT="test"
-
 inherit distutils-r1 versionator
 
 MY_P="${PN}-$(replace_version_separator 3 -)"
