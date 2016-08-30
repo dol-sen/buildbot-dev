@@ -5,8 +5,6 @@
 EAPI=5
 PYTHON_COMPAT=( python{2_7,3_3,3_4,3_5} )
 
-RESTRICT="test"
-
 inherit distutils-r1
 
 DESCRIPTION="a helper library for writing code unmodified on both Twisted and asyncio"
@@ -31,6 +29,12 @@ DEPEND="app-arch/unzip
 		~dev-python/mock-1.3.0[${PYTHON_USEDEP}]
 		>=dev-python/tox-2.1.1[${PYTHON_USEDEP}]
 	)"
+
+src_prepare() {
+	# Take out failing tests known to pass when run manually
+	# we certainly don't need to test "python setup.py sdist" here
+	rm "${S}/test/test_packaging.py" || die
+}
 
 python_prepare() {
 	# https://github.com/tavendo/txaio/issues/3
