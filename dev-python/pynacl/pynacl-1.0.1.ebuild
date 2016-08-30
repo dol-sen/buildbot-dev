@@ -27,3 +27,5 @@ DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]
 	test? ( >=dev-python/pytest-2.6.4[${PYTHON_USEDEP}] )
 "
+
+S=${WORKDIR}/${MY_P}
