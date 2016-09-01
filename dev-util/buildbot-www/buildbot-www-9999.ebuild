@@ -13,7 +13,6 @@ inherit git-r3 distutils-r1
 DESCRIPTION="BuildBot base web interface, use with buildbot-{console-view,waterfall-view}..."
 HOMEPAGE="http://trac.buildbot.net/ https://github.com/buildbot/buildbot http://pypi.python.org/pypi/buildbot"
 
-MY_PV="${PV/_p/p}"
 MY_V="0.9.0rc1"
 MY_P="${PN}-${MY_V}"
 [[ ${PV} == *9999 ]] || SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${MY_P}.tar.gz"
