@@ -3,7 +3,7 @@
 # $Id$
 
 EAPI=5
-PYTHON_COMPAT=( python2_7 python3_4)
+PYTHON_COMPAT=( python2_7 python3_{4,5})
 PYTHON_REQ_USE="threads(+)"
 
 inherit eutils flag-o-matic twisted-r1
