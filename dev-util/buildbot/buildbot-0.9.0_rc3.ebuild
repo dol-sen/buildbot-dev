@@ -30,19 +30,10 @@ IUSE="crypt doc examples irc mail manhole test"
 
 RDEPEND=">=dev-python/jinja-2.1[${PYTHON_USEDEP}]
 	|| (
-		( >=dev-python/twisted-web-14.0.1[${PYTHON_USEDEP}]
-			<=dev-python/autobahn-0.16.0[${PYTHON_USEDEP}]
-		)
-		|| (
-			( >=dev-python/twisted-16.0.0[${PYTHON_USEDEP}]
-				<dev-python/twisted-16.3.0[${PYTHON_USEDEP}]
-				<=dev-python/autobahn-0.16.0[${PYTHON_USEDEP}]
-			)
-			( >=dev-python/twisted-16.3.0[${PYTHON_USEDEP}]
-				>=dev-python/autobahn-0.16.0[${PYTHON_USEDEP}]
-			)
-		)
+		>=dev-python/twisted-web-14.0.1[${PYTHON_USEDEP}]
+		>=dev-python/twisted-16.0.0[${PYTHON_USEDEP}]
 	)
+	>=dev-python/autobahn-0.16.0[${PYTHON_USEDEP}]
 	>=dev-python/sqlalchemy-0.8[${PYTHON_USEDEP}]
 	>=dev-python/sqlalchemy-migrate-0.9[${PYTHON_USEDEP}]
 	crypt? (
