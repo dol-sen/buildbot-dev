@@ -5,23 +5,18 @@
 EAPI=5
 PYTHON_COMPAT=( python2_7 python3_{4,5})
 PYTHON_REQ_USE="threads(+)"
+TWISTED_PN="Twisted"
 
 inherit eutils flag-o-matic twisted-r1
 
 DESCRIPTION="An asynchronous networking framework written in Python"
+SRC_URI="http://twistedmatrix.com/Releases/${TWISTED_PN}"
+SRC_URI="${SRC_URI}/${TWISTED_RELEASE}/${TWISTED_P}.tar.bz2"
 
-HOMEPAGE="https://github.com/twisted/twisted https://pypi.python.org/pypi/Twisted"
-
-SRC_URI="mirror://pypi/${P:0:1}/twisted/Twisted-${PV}.tar.bz2 -> ${P}.tar.bz2"
-
-LICENSE="MIT"
-
-SLOT="0"
-
+# Dropped keywords due to new deps not keyworded
 #KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~ppc ~ppc64 ~s390 ~sh ~x86 ~x86-fbsd ~ia64-hpux ~x86-interix ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 KEYWORDS="~amd64 ~x86"
-
-IUSE="conch crypt dev http2 serial +soap test"
+IUSE="conch crypt http2 serial +soap test"
 
 RDEPEND=">=dev-python/zope-interface-3.6.0[${PYTHON_USEDEP}]
 	conch? (
@@ -34,14 +29,6 @@ RDEPEND=">=dev-python/zope-interface-3.6.0[${PYTHON_USEDEP}]
 		>=dev-python/pyopenssl-0.13[${PYTHON_USEDEP}]
 		dev-python/service_identity[${PYTHON_USEDEP}]
 		dev-python/idna[${PYTHON_USEDEP}]
-	)
-	dev? (
-		>=dev-python/twistedchecker-0.4.0[${PYTHON_USEDEP}]
-		>=dev-python/pyflakes-1.0.0[${PYTHON_USEDEP}]
-		>=dev-python/twisted-dev-tools-0.0.2[${PYTHON_USEDEP}]
-		dev-python/subunit[${PYTHON_USEDEP}]
-		>=dev-python/sphinx-1.3.1[${PYTHON_USEDEP}]
-		$(python_gen_cond_dep '>=dev-python/pydoctor-15.0.0[${PYTHON_USEDEP}]' python2_7)
 	)
 	serial? ( dev-python/pyserial[${PYTHON_USEDEP}] )
 	soap? ( $(python_gen_cond_dep 'dev-python/soappy[${PYTHON_USEDEP}]' python2_7) )
@@ -59,7 +46,16 @@ DEPEND="
 	!dev-python/twisted-names
 	!dev-python/twisted-words
 	!dev-python/twisted-web
-	test? ( ${RDEPEND} )
+	test? (
+		dev-python/gmpy[${PYTHON_USEDEP}]
+		dev-python/pyasn1[${PYTHON_USEDEP}]
+		>=dev-python/cryptography-0.9.1[${PYTHON_USEDEP}]
+		>=dev-python/appdirs-1.4.0[${PYTHON_USEDEP}]
+		>=dev-python/pyopenssl-0.13[${PYTHON_USEDEP}]
+		dev-python/service_identity[${PYTHON_USEDEP}]
+		dev-python/idna[${PYTHON_USEDEP}]
+		dev-python/pyserial[${PYTHON_USEDEP}]
+	)
 "
 
 PATCHES=(
@@ -68,6 +64,10 @@ PATCHES=(
 )
 
 python_prepare_all() {
+	# Remove some tests known to fail due to the network sandbox
+	rm -R twisted/pair/test/test_*.py || die "rm twisted/pair/test/test_*.py FAILED"
+	# Possibly due to over taxing of the distutils_install_for_testing function
+	rm twisted/python/test/test_release.py || die "rm twisted/python/test/test_release.py FAILED"
 	if [[ "${EUID}" -eq 0 ]]; then
 		# Disable tests failing with root permissions.
 		sed \
@@ -94,44 +94,6 @@ python_test() {
 	distutils_install_for_testing
 
 	pushd "${TEST_DIR}"/lib > /dev/null || die
-
-	# Skip broken tests.
-
-	# http://twistedmatrix.com/trac/ticket/5375
-	sed -e "/class ZshIntegrationTestCase/,/^$/d" -i twisted/scripts/test/test_scripts.py \
-		|| die "sed failed"
-
-	# Prevent it from pulling in plugins from already installed twisted packages.
-	rm -f twisted/plugins/__init__.py
-
-	# An empty file doesn't work because the tests check for doc strings in all packages.
-	echo "'''plugins stub'''" > twisted/plugins/__init__.py || die
-
-	# https://twistedmatrix.com/trac/ticket/6920 6921
-	# Just re-exposing them to list a full list of deficits
-#	sed -e 's:test_basicOperation:_&:' -i twisted/scripts/test/test_tap2deb.py || die
-#	sed -e 's:test_inspectCertificate:_&:' -i twisted/test/test_sslverify.py || die
-
-	# Requires twisted-web, twisted-lore and twisted-names, creating a circ. dep and fail even if installed.
-	# test_loreDeprecation and test_exist failures appeared in version 14.0.0.
-	# Possibly due to over taxing of the distutils_install_for_testing function
-	rm -f twisted/python/test/test_release.py || die
-	sed -e 's:test_loreDeprecation:_&:' -i twisted/test/test_twisted.py || die
-	sed -e 's:test_exist:_&:' -i twisted/python/test/test_dist3.py || die
-
-	# Requires connection to the network
-	sed -e 's:test_multiListen:_&:' -i twisted/test/test_udp.py || die
-
-	# Appeared in version 14.0.0; https://twistedmatrix.com/trac/ticket/7422; known failures
-	# Upstream somewhat unreceptive
-	# The last of these invokes a hang or a long delay
-	sed -e 's:test_dataReceivedThrows:_&:' \
-		-e 's:test_resumeProducingThrows:_&:' \
-		-e 's:test_resumeProducingAbortLater:_&:' \
-		-e 's:test_resumeProducingAbort:_&:' \
-		-e 's:test_fullWriteBufferAfterByteExchange:_&:' \
-		-i twisted/internet/test/test_tcp.py || die
-	sed -e 's:test_logPrefix:_&:' -i twisted/internet/test/connectionmixins.py || die
 
 	if ! "${TEST_DIR}"/scripts/trial twisted; then
 		die "Tests failed with ${EPYTHON}"
@@ -163,4 +125,10 @@ python_install_all() {
 
 pkg_postinst() {
 	einfo "Install complete"
+}
+
+pkg_postrm(){
+	# pre portage-2.3.2 release workaround for bug 595028
+	cd "${HOME}"
+	_distutils-r1_run_foreach_impl twisted-r1_update_plugin_cache
 }
