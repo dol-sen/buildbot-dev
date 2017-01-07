@@ -76,10 +76,8 @@ python_compile_all() {
 python_test() {
 	mkdir -p "${BUILD_DIR}/sphinx_tempdir"
 	export SPHINX_TEST_TEMPDIR="${BUILD_DIR}/sphinx_tempdir"
-	cp -r -l tests "${SPHINX_TEST_TEMPDIR}"/ || die
-	cp Makefile "${SPHINX_TEST_TEMPDIR}"/ || die
-	cp -r -l "${BUILD_DIR}/lib/sphinx" "${SPHINX_TEST_TEMPDIR}"/ || die
-	cd "${SPHINX_TEST_TEMPDIR}"
+	cp -r -l tests "${BUILD_DIR}"/ || die "Failed to copy tests"
+	cp Makefile "${BUILD_DIR}"/ || die "Failed to copy Makefile"
 	emake test
 }
 
