@@ -18,7 +18,7 @@ SRC_URI="${SRC_URI}/${TWISTED_RELEASE}/${TWISTED_P}.tar.bz2"
 KEYWORDS="~amd64 ~x86"
 IUSE="conch crypt http2 serial +soap test"
 
-RDEPEND=">=dev-python/zope-interface-3.6.0[${PYTHON_USEDEP}]
+RDEPEND=">=dev-python/zope-interface-4.0.2[${PYTHON_USEDEP}]
 	conch? (
 		dev-python/gmpy[${PYTHON_USEDEP}]
 		dev-python/pyasn1[${PYTHON_USEDEP}]
@@ -26,9 +26,9 @@ RDEPEND=">=dev-python/zope-interface-3.6.0[${PYTHON_USEDEP}]
 		>=dev-python/appdirs-1.4.0[${PYTHON_USEDEP}]
 	)
 	crypt? (
-		>=dev-python/pyopenssl-0.13[${PYTHON_USEDEP}]
+		>=dev-python/pyopenssl-16.0.0[${PYTHON_USEDEP}]
 		dev-python/service_identity[${PYTHON_USEDEP}]
-		dev-python/idna[${PYTHON_USEDEP}]
+		>=dev-python/idna-0.6[${PYTHON_USEDEP}]
 	)
 	serial? ( dev-python/pyserial[${PYTHON_USEDEP}] )
 	soap? ( $(python_gen_cond_dep 'dev-python/soappy[${PYTHON_USEDEP}]' python2_7) )
@@ -38,14 +38,18 @@ RDEPEND=">=dev-python/zope-interface-3.6.0[${PYTHON_USEDEP}]
 		>=dev-python/priority-1.1.0[${PYTHON_USEDEP}]
 		<dev-python/priority-2.0[${PYTHON_USEDEP}]
 	)
-"
-DEPEND="
-	!dev-python/twisted-core
 	!dev-python/twisted-conch
+	!dev-python/twisted-core
+	!dev-python/twisted-lore
 	!dev-python/twisted-mail
 	!dev-python/twisted-names
-	!dev-python/twisted-words
+	!dev-python/twisted-news
+	!dev-python/twisted-pair
+	!dev-python/twisted-runner
 	!dev-python/twisted-web
+	!dev-python/twisted-words
+"
+DEPEND="
 	test? (
 		dev-python/gmpy[${PYTHON_USEDEP}]
 		dev-python/pyasn1[${PYTHON_USEDEP}]
@@ -63,17 +67,45 @@ PATCHES=(
 	"${FILESDIR}/${PN}-core-9.0.0-respect_TWISTED_DISABLE_WRITING_OF_PLUGIN_CACHE.patch"
 )
 
-python_prepare_all() {
-	# Remove some tests known to fail due to the network sandbox
-	rm -R twisted/pair/test/test_*.py || die "rm twisted/pair/test/test_*.py FAILED"
-	# Possibly due to over taxing of the distutils_install_for_testing function
+_twisted_prepare_test() {
+	# Remove since this is an upstream distribution test for making releases
 	rm twisted/python/test/test_release.py || die "rm twisted/python/test/test_release.py FAILED"
+
 	if [[ "${EUID}" -eq 0 ]]; then
 		# Disable tests failing with root permissions.
 		sed \
 			-e "s/test_newPluginsOnReadOnlyPath/_&/" \
 			-e "s/test_deployedMode/_&/" \
 			-i twisted/test/test_plugin.py
+	fi
+
+	# Remove tests known to fail due to the network sandbox
+	rm -R twisted/pair/test/test_*.py || die "rm twisted/pair/test/test_*.py FAILED"
+	sed \
+		-e "s/test_loggingFactoryOpensLogfileAutomatically/_&/" \
+		-i twisted/test/test_policies.py
+	sed \
+		-e "s/testLookupProcNetTcp/_&/" \
+		-i twisted/test/test_ident.py
+
+	# py2.7 only failures... appears to get the wrong form of the correct data
+	# upstream bug: https://twistedmatrix.com/trac/ticket/8872
+	sed \
+		-e "s/test_unicodeErrorMessageTruncated(self)/_&/" \
+		-e "s/test_unicodeError/_&/" \
+		-i twisted/test/test_twistd.py
+
+	# disable due to removing some tests from installation
+	sed \
+		-e "s/test_exist/_&/" \
+		-i twisted/python/test/test_dist3.py
+}
+
+python_prepare_all() {
+	# disable tests that don't work in our sandbox
+	# and other test failures due to our conditions
+	if use test ; then
+		_twisted_prepare_test
 	fi
 
 	distutils-r1_python_prepare_all
@@ -93,9 +125,14 @@ python_compile() {
 python_test() {
 	distutils_install_for_testing
 
+	# workaround for the eclass not installing the entry points
+	# in the test environment.  copy the old 16.3.2 start script
+	# to run the tests with
+	cp "${FILESDIR}"/trial "${TEST_DIR}"/lib/
+
 	pushd "${TEST_DIR}"/lib > /dev/null || die
 
-	if ! "${TEST_DIR}"/scripts/trial twisted; then
+	if ! "${TEST_DIR}"/lib/trial twisted; then
 		die "Tests failed with ${EPYTHON}"
 	fi
 
